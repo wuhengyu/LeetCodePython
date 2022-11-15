@@ -15,7 +15,28 @@
 '''
 
 
-class Solution:
+class ListNode(object):
+    def __init__(self, val=None, next=None):
+        self.val = val
+        self.next = next
+
+
+# 创建链表
+def build_link(nums):
+    li = cur = ListNode()
+    for i in nums:
+        cur.next = ListNode(i)
+        cur = cur.next
+    return li.next
+
+def printNode(node):
+    while node:
+        # print('\nnode: ', node, ' value: ', node.val, ' next: ', node.next)
+        print(' value: ', node.val)
+        node = node.next
+
+
+class Solution():
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         head = curr = ListNode()
         carry = val = 0
@@ -29,7 +50,12 @@ class Solution:
             carry, val = divmod(val, 10)
             curr.next = curr = ListNode(val)
 
+        print(printNode(head))
         return head.next
 
 
-print(Solution().addTwoNumbers([2, 4, 3], [5, 6, 4]))
+nums1 = [2, 4, 3]
+nums2 = [5, 6, 4]
+l1 = build_link(nums1)
+l2 = build_link(nums2)
+print(Solution().addTwoNumbers(l1, l2))
