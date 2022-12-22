@@ -24,6 +24,8 @@
 l1 和 l2 均按 非递减顺序 排列
 '''
 import ListNodeTest
+
+# 方法一：递归
 class Solution:
     def mergeTwoLists(self, l1: ListNodeTest.ListNode, l2: ListNodeTest.ListNode) -> ListNodeTest.ListNode:
         if not l1:
@@ -31,6 +33,7 @@ class Solution:
         if not l2:
             return l1
 
+        # 1\3\5和2\4\6
         if l1.val < l2.val:
             l1.next = self.mergeTwoLists(l1.next, l2)
             return l1
@@ -56,3 +59,41 @@ while head:
     print(head.val)
     head = head.next
     print(head)
+
+# 方法二：迭代
+
+class Solution2:
+    def mergeTwoLists(self, l1: ListNodeTest.ListNode, l2: ListNodeTest.ListNode) -> ListNodeTest.ListNode:
+        prehead = ListNodeTest.ListNode(-1)
+
+        prev = prehead
+        while l1 and l2:
+            if l1.val <= l2.val:
+                prev.next = l1
+                l1 = l1.next
+            else:
+                prev.next = l2
+                l2 = l2.next
+            prev = prev.next
+
+        # 合并后 l1 和 l2 最多只有一个还未被合并完，我们直接将链表末尾指向未合并完的链表即可
+        prev.next = l1 if l1 is not None else l2
+
+        return prehead.next
+
+node1 = ListNodeTest.ListNode(1)
+node2 = ListNodeTest.ListNode(2)
+node3 = ListNodeTest.ListNode(3)
+node4 = ListNodeTest.ListNode(4)
+node5 = ListNodeTest.ListNode(5)
+node6 = ListNodeTest.ListNode(6)
+
+node1.next = node3
+node3.next = node5
+node2.next = node4
+node4.next = node6
+head2 = Solution2().mergeTwoLists(node1, node2)
+while head2:
+    print(head2.val)
+    head2 = head2.next
+    print(head2)
