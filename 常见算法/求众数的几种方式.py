@@ -34,6 +34,7 @@ def mode(numbers):
         else:
             count[number] = 1
     return max(count, key=count.get)
+    # return {v: k for k, v in count.items()}[max(count.values())]
 
 
 # 结论：

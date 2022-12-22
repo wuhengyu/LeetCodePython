@@ -47,11 +47,6 @@ class Solution3:
 
 
 nums = [1, 2, 3, 4, 5, 2, 2, 3, 2, 4, 5, 6]
-# print(Solution().majorityElement(nums))
-# print(Solution2().majorityElement(nums))
-# print(Solution3().majorityElement(nums))
-
-
-count = {1: 1, 2: 4, 3: 2, 4: 2, 5: 2, 6: 1}
-print({v: k for k, v in count.items()})
-print({v: k for k, v in count.items()}[max(count.values())])
+print(Solution().majorityElement(nums))
+print(Solution2().majorityElement(nums))
+print(Solution3().majorityElement(nums))
