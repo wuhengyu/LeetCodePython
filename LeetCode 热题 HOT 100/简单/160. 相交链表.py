@@ -33,59 +33,147 @@ from typing import Optional
 
 import ListNodeTest
 # 方法一：哈希集合
-# class Solution:
-#     def getIntersectionNode(self, headA: ListNodeTest.ListNode, headB: ListNodeTest.ListNode) -> Optional[
-#         ListNodeTest.ListNode]:
-#         visited = set()
-#         temp = headA
-#         while (temp != None):
-#             visited.add(temp)
-#             temp = temp.next
-#         temp = headB
-#         while (temp != None):
-#             if (visited(temp)):
-#                 return temp
-#             temp = temp.next
-#         return None
+# 在这个代码中，我们使用了 Python 中的集合 set 来存储节点是否已被访问过。
+# 这样，在遍历链表 B 的时候，如果当前结点出现在集合中，说明它是链表 A 和链表 B 的相交点。
+class ListNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+class Solution:
+    def getIntersectionNode(self, headA, headB):
+        visited = set()
+        temp = headA
+        while temp:
+            visited.add(temp)
+            temp = temp.next
+        temp = headB
+        while temp:
+            if temp in visited:
+                return temp
+            temp = temp.next
+        return None
+
+# 测试代码
+node1 = ListNode(1)
+node2 = ListNode(2)
+node3 = ListNode(3)
+node4 = ListNode(4)
+node5 = ListNode(5)
+node6 = ListNode(6)
+
+node1.next = node2
+node2.next = node3
+node3.next = node4
+node4.next = node5
+node5.next = node6
+
+node7 = ListNode(7)
+node8 = ListNode(8)
+
+node7.next = node8
+node8.next = node4
+
+intersection = Solution().getIntersectionNode(node1, node7)
+print(intersection.val)  # 输出 4
 
 
 # 方法二：双指针
-# public class Solution {
-#     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-#         if (headA == null || headB == null) {
-#             return null;
-#         }
-#         ListNode pA = headA, pB = headB;
-#         while (pA != pB) {
-#             pA = pA == null ? headB : pA.next;
-#             pB = pB == null ? headA : pB.next;
-#         }
-#         return pA;
-#     }
-# }
+# 在这个代码中，我们使用了 Python 中的三元运算符来实现条件赋值。
+# 如果两个指针当前结点为空，则将它们设为另一个链表的头结点。否则，就将它们向前移动一步。
+class ListNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
 
 class Solution:
-    def getIntersectionNode(self, headA: ListNodeTest.ListNode, headB: ListNodeTest.ListNode) -> ListNodeTest.ListNode:
-        A, B = headA, headB
-        while A != B:
-            A = A.next if A else headB
-            B = B.next if B else headA
-        return A
+    def getIntersectionNode(self, headA, headB):
+        if not headA or not headB:
+            return None
+        pA, pB = headA, headB
+        while pA != pB:
+            pA = pA.next if pA else headB
+            pB = pB.next if pB else headA
+        return pA
+
+# 测试代码
+node1 = ListNode(1)
+node2 = ListNode(2)
+node3 = ListNode(3)
+node4 = ListNode(4)
+node5 = ListNode(5)
+node6 = ListNode(6)
+
+node1.next = node2
+node2.next = node3
+node3.next = node4
+node4.next = node5
+node5.next = node6
+
+node7 = ListNode(7)
+node8 = ListNode(8)
+
+node7.next = node8
+node8.next = node4
+
+intersection = Solution().getIntersectionNode(node1, node7)
+print(intersection.val)  # 输出 4
 
 
-node1 = ListNodeTest.ListNode(1)
-node2 = ListNodeTest.ListNode(2)
-node3 = ListNodeTest.ListNode(3)
-node4 = ListNodeTest.ListNode(3)
-node5 = ListNodeTest.ListNode(5)
-node6 = ListNodeTest.ListNode(5)
 
-node1.next = node3
-node3.next = node5
-node2.next = node4
-node4.next = node6
-head1 = Solution().getIntersectionNode(node1, node2)
-while head1:
-    print(head1.val)
-    head2 = head1.next
-    print(head1)
+class ListNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+class Solution:
+    def getIntersectionNode(self, headA, headB):
+        # 求出两个链表的长度
+        len1, len2 = 0, 0
+        p1, p2 = headA, headB
+        while p1:
+            len1 += 1
+            p1 = p1.next
+        while p2:
+            len2 += 1
+            p2 = p2.next
+
+        # 将较长的链表的指针向前移动差值步
+        p1, p2 = headA, headB
+        if len1 > len2:
+            for i in range(len1 - len2):
+                p1 = p1.next
+        else:
+            for i in range(len2 - len1):
+                p2 = p2.next
+
+        # 同时向前
+        while p1 and p2:
+            if p1 == p2:
+                return p1
+            p1 = p1.next
+            p2 = p2.next
+        return None
+
+
+node1 = ListNode(1)
+node2 = ListNode(2)
+node3 = ListNode(3)
+node4 = ListNode(4)
+node5 = ListNode(5)
+node6 = ListNode(6)
+
+node1.next = node2
+node2.next = node3
+node3.next = node4
+node4.next = node5
+node5.next = node6
+
+node7 = ListNode(7)
+node8 = ListNode(8)
+
+node7.next = node8
+node8.next = node4
+
+intersection = Solution().getIntersectionNode(node1, node7)
+print(intersection.val) # 输出 4
