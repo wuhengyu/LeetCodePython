@@ -29,7 +29,6 @@ class Solution:
     def isValid(self, s: str) -> bool:
         if len(s) % 2 == 1:
             return False
-
         pairs = {
             ")": "(",
             "]": "[",
@@ -38,10 +37,14 @@ class Solution:
         stack = list()
         for ch in s:
             if ch in pairs:
+                print(stack[-1])
+                print(pairs[ch])
                 if not stack or stack[-1] != pairs[ch]:
                     return False
                 stack.pop()
             else:
                 stack.append(ch)
-
         return not stack
+
+
+print(Solution().isValid("()[]{}"))
