@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2022/11/14 12:02
 # @Author  : Walter
-# @File    : 1. 两数之和.py
+# @File    : 2. 两数相加.py
 # @License : (C)Copyright Walter
 # @Desc    :
 
