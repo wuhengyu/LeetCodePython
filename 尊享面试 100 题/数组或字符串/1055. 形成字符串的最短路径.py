@@ -29,7 +29,14 @@
 source和target仅包含英文小写字母。
 '''
 
-
+'''
+初始化计数器 count 为 0。
+遍历目标字符串 target 的字符，并用一个指针 source_ptr 在源字符串 source 中寻找相匹配的字符。
+当找到匹配的字符时，移动 source_ptr 到下一个字符。
+如果 source_ptr 到达源字符串 source 的末尾，说明我们已经找到一个子序列，那么将计数器 count 加 1，并将 source_ptr 重置为 0。
+重复步骤 2-4 直到遍历完目标字符串 target。
+如果计数器 count 为 0，则返回 -1，否则返回 count。
+'''
 class Solution:
     def shortest_way_to_form_string(self, source: str, target: str) -> int:
         count = 0
