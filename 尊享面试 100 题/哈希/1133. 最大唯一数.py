@@ -32,21 +32,27 @@ from typing import List
 class Solution:
     def largestUniqueNumber(self, A: List[int]) -> int:
         m = collections.defaultdict(int)
+        # 统计每个数字出现的次数
         for num in A:
             m[num] += 1
 
         mx = -1
+        # 遍历哈希表，找到只出现一次的最大数字，v == 1 且 k > mx
         for k, v in m.items():
             if v == 1 and k > mx:
                 mx = k
         return mx
 
 # 方法二：计数排序
+# 计数排序是一个非基于比较的排序算法。它的优势在于在对一定范围内的整数排序时，它的复杂度为O(+)O(n+k)（其中 k 是整数的范围），快于任何比较排序算法。
+
 class Solution2:
     def largestUniqueNumber(self, A: List[int]) -> int:
         r = [0] * 1001
+        # 按数组值大小，统计每个数字出现的次数，数组值就是r的下标，已排序
         for num in A:
             r[num] += 1
+        # 倒序遍历r，找到第一个出现一次的数字
         for i in range(1000, -1, -1):
             if r[i] == 1:
                 return i
