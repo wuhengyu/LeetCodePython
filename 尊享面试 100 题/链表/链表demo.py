@@ -18,10 +18,12 @@ root.right.left = TreeNode(2)
 root.right.right = TreeNode(4)
 root.right.right.right = TreeNode(5)
 
+# 遍历右节点
 while root:
     print(root.val)
     root = root.right
 
+# 遍历左节点
 # while root:
 #     print(root.val)
 #     root = root.left
