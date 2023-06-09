@@ -23,6 +23,14 @@
 由链表表示的数字不包含前导零，除了零本身。
 '''
 
+# 三种情况：
+# 最靠右的不是 9 的数字，将该数字加 1，然后将该数字之后所有的 9 改成 0。
+# 123->124
+# 最靠右的不是 9 的数字，将该数字加 1，然后将该数字之后所有的 9 改成 0。
+# 129->130
+# 需要用到哨兵节点
+# 999->1000
+
 # 解题思路：
 # 初始化哨兵节点 ListNode(0)，同时将它设为新的头节点：sentinel.next = head。
 # 找到最靠右的数值不为 9 的节点。
@@ -45,6 +53,7 @@ class Solution:
 
         while head:
             if head.val != 9:
+                # 没有9节点的时候，不需要哨兵结点
                 not_nine = head
             head = head.next
 
@@ -55,12 +64,31 @@ class Solution:
             not_nine.val = 0
             not_nine = not_nine.next
 
-        return sentinel if sentinel.val else sentinel.next
+        # 如果头结点的值为1，返回哨兵结点，否则返回原始头结点
+        if sentinel.val:
+            return sentinel
+        else:
+            return sentinel.next
+        # return sentinel if sentinel.val else sentinel.next
 
 
-print(Solution().plusOne(ListNode(1, ListNode(2, ListNode(3)))).val)
+singleList = Solution()
 
-root = ListNode(1)
-root.next = ListNode(2)
-root.next.next = ListNode(3)
-print(Solution().plusOne(root).val)
+# root1 = ListNode(1, ListNode(2, ListNode(3)))
+# root1 = singleList.plusOne(root1)
+#
+# # 输出链表
+# while root1:
+#     print(root1.val)
+#     root1 = root1.next
+
+
+root2 = ListNode(9)
+root2.next = ListNode(9)
+root2.next.next = ListNode(9)
+root2 = singleList.plusOne(root2)
+
+# 输出链表
+while root2:
+    print(root2.val)
+    root2 = root2.next
