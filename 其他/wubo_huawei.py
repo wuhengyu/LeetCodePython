@@ -34,7 +34,16 @@ for item in items:
         # 将手机名称按照空格分割成一个列表
         name_list = name.split()
         # 找到包含“HUAWEI”的元素，并将其后面的元素拼接起来
-        huawei_index = name_list.index("华为/HUAWEI")
+        if "HUAWEI" in name_list:
+            huawei_index = name_list.index("HUAWEI")
+        elif "华为" in name_list:
+            huawei_index = name_list.index("华为")
+        elif "华为畅享" in name_list:
+            huawei_index = name_list.index("华为畅享")
+        elif "华为/HUAWEI" in name_list:
+            huawei_index = name_list.index("华为/HUAWEI")
+        else:
+            huawei_index = 0
         name = "".join(name_list[huawei_index:huawei_index + 2])
 
         price = item.select('.p-price strong')[0].i.text.strip()
@@ -44,19 +53,12 @@ for item in items:
 df = pd.DataFrame(data)
 
 # 将数据保存到文件中
-df.to_csv('吴博.txt', index=False)
+df.to_csv('jd_product.txt', index=False)
 
 # 绘制销售排名前十的手机销售柱状图
 df['price'] = df['price'].str.replace(',', '').astype(float)
-top10 = df[df['name'].str.contains('华为')].head(15)
-print(top10)
-# 检查是否有重复值并去除
-if top10[top10.duplicated()].shape[0] > 0:
-    top10 = top10.drop_duplicates()
-
-# 检查是否有缺失值并去除
-if top10[top10.isnull().any(axis=1)].shape[0] > 0:
-    top10 = top10.dropna()
+# top10 = df[df['name'].str.contains('HUAWEI')].head(10)
+top10 = df.head(15)
 
 # 指定字体文件路径
 font_path = '苹方黑体-极细-简.ttf'
@@ -65,8 +67,13 @@ font = FontProperties(fname=font_path)
 # 使用指定字体绘制图表
 plt.figure(figsize=(12, 8))  # 设置图表大小
 plt.subplots_adjust(bottom=0.3)  # 调整x轴标签位置
+
+
+# counts = df["name"].value_counts().sort_values(ascending=False).head(10)
+# plt.bar(counts.index, counts.values)
+
 plt.bar(top10['name'], top10['price'])
-plt.xticks(rotation=90, fontproperties=font)
+plt.xticks(rotation=45, ha='right', fontproperties=font)
 plt.title('销售排名前十的华为手机', fontproperties=font)
 plt.xlabel('手机型号', fontproperties=font)
 plt.ylabel('价格（元）', fontproperties=font)
