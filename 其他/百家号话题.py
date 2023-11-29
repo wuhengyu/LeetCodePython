@@ -17,7 +17,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # 设置浏览器驱动程序路径
 
-s = Service(r'C:\Users\wuhengyu\Downloads\Compressed\chromedriver-win64\chromedriver-win64\chromedriver.exe')
+s = Service(r'C:\Users\v_vhengyuwu\Downloads\Compressed\chromedriver-win64\chromedriver-win64\chromedriver.exe')
 
 # 创建浏览器实例
 driver = webdriver.Chrome(service=s)
@@ -27,7 +27,7 @@ driver.maximize_window()
 driver.find_element(By.XPATH, '//*[@id="welcome-navigator"]/div/span').click()
 time.sleep(15)
 driver.get(make_url)
-time.sleep(3)
+time.sleep(15)
 items = driver.find_elements(By.XPATH,
                              '//div[@class="overflow-auto flex-grow h-0 saas-scrollbar mt-[-4px] pl-[24px] pr-[10px] pb-[18px]"]')
 

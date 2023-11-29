@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Time    : 2023/7/3 23:02
 # Author  : Walter
-# File    : demo2.py
+# File    : 创建渠道.py
 # License : (C)Copyright Walter
 # Version : 1.0
 # Desc    :
