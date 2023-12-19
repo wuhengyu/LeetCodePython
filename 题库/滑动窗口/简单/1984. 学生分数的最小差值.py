@@ -52,3 +52,7 @@ class Solution:
 
 
 print(Solution().minimumDifference([9,4,1,7], 2))
+
+
+
+

@@ -5,6 +5,7 @@
 # License : (C)Copyright Walter
 # Version : 1.0
 # Desc    :
+import json
 import re
 
 from selenium import webdriver
@@ -37,4 +38,4 @@ replaced_list = replaced_text.split('\n')
 for i in range(len(replaced_list)):
     replaced_text = f"{replaced_list[i]},基于你的观点快速生成一篇动态。"
     contents.append(replaced_text)
-print(contents)
+print(json.dumps(contents[:25], ensure_ascii=False, indent=4))
