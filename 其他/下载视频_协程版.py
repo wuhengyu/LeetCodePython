@@ -72,15 +72,14 @@ async def convert_video_to_audio(video_path, audio_path):
         print(f"Error occurred: {str(e)}")
 
 
-url = 'https://vip.lz-cdn2.com/20220407/2560_9828ebdc/1200k/hls/mixed.m3u8'
+url = 'https://vip.lz-cdn.com/20220317/265_eb44f4d7/1200k/hls/mixed.m3u8'
+if not os.path.exists('./电视剧'):
+    os.mkdir('./电视剧')
 
-if not os.path.exists('./电影'):
-    os.mkdir('./电影')
-
-output_filename = './电影/破坏之王.mp4'
+output_filename = './电视剧/甄嬛传第05集.mp4'
 
 # 调用函数下载和合并视频
 asyncio.run(download_and_merge(url, output_filename))
-
+os.remove(output_filename)
 # loop = asyncio.get_event_loop()
 # loop.run_until_complete(download_and_merge(url, output_filename))
